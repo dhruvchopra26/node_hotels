@@ -10,6 +10,7 @@ const app=express();
 const db= require('./db');//pehle import krke connection establish kro uske baad http requests handle hongi
 const Person=require('./Models/person');
 const MenuItem=require('./Models/MenuItem');
+require('dotenv').config();
 
 
 const bodyParser= require('body-parser');
@@ -19,8 +20,9 @@ app.get('/', (req,res) => {
     res.send('KYA HAAL HAIN BHAI');
 })
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000,()=>{
+app.listen(PORT,()=>{
     console.log('listening on port 3000');
 });
 
