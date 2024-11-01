@@ -11,14 +11,27 @@ const db= require('./db');//pehle import krke connection establish kro uske baad
 const Person=require('./Models/person');
 const MenuItem=require('./Models/MenuItem');
 require('dotenv').config();
+const passport = require('./auth');
 
 
 const bodyParser= require('body-parser');
 app.use(bodyParser.json());//req.body me store krlega body parser jo bhi data aayega post method se
 
-app.get('/', (req,res) => {
+//Middleware Function
+
+const logRequest = (req,res,next) => {
+    console.log(`[${new Date().toLocaleString()}] Request Made To : ${req.originalUrl}`);
+    next();
+}
+app.use(logRequest);
+
+app.get('/',(req,res) => {
     res.send('KYA HAAL HAIN BHAI');
 })
+
+app.use(passport.initialize());
+
+const localAuthMiddleware=passport.authenticate('local',{session:false});
 
 const PORT = process.env.PORT || 3000;
 
