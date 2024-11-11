@@ -25,7 +25,7 @@ router.get('/:taste', async (req,res)=>{
             res.status(200).json(response);
         }
         else{
-            res.status(404).json({error:'Invalid work type'});
+            res.status(404).json({error:'Invalid taste'});
         }
     }
     catch(err){

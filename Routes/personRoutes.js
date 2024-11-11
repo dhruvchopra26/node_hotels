@@ -3,6 +3,19 @@ const router = express.Router();
 const Person=require('../Models/person');
 const {jwtAuthMiddleware,generateToken} = require('../jwt'); 
 
+router.get('/',jwtAuthMiddleware, async (req,res)=>{
+    try{
+        const response = await Person.find();
+        console.log('Response Fetched');
+        res.status(200).json(response);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send('Server error occured');
+    }
+});
+
+
 router.post('/signup', async (req,res)=>{
     try{
         const data=req.body;
